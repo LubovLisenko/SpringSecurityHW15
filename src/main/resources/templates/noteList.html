@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Note</title>
+    <style>
+   .b1 {
+    background: green;
+    color: white;
+    font-size: 15pt;
+   }
+   .b2 {
+    background: red;
+    color: white;
+    font-size: 15pt;
+   }
+   .b3{
+    color: black;
+    font-size: 20pt;
+    }
+    .b4 {
+    background: blue;
+    color: white;
+    font-size: 15pt;
+   }
+
+
+  </style>
+</head>
+<body>
+<form th:action="@{/create}" method="post" th:object="${note}">
+    <a href="/note/create" class="b1">Add note</a>
+</form>
+<h1> Note List</h1>
+<table style= "width:100%">
+    <tr>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="note:${note}">
+        <td  th:text="${note.title}"></td>
+        <td th:text ="${note.content}"></td>
+        <td><a th:href="@{'/note/edit?id=' + ${note.id}}">
+            <button type="submit" class="b4">Update</button></a></td>
+        <td> <form th:action="'/note/delete'" method="post" >
+            <input type="hidden" name="id" th:value="${note.getId()}">
+            <button type="submit" class="b2">Delete</button>
+        </form>
+        </td>>
+</table>
+</body>
+</html>
